@@ -1,25 +1,24 @@
 # 🛒 GoCommerce
 
 A simple and scalable e-commerce backend built with Go (Golang).  
-This project is part of my backend development learning journey, focused on building real-world, production-ready systems using clean architecture principles and Go’s powerful standard library.
+This project is part of my backend development learning journey, focused on building real-world, 
+production-ready systems using clean architecture principles and Go’s powerful standard library.
 
 ## ✨ Features
 
 - 📦 Product Management (CRUD)
 - 🛍️ Shopping Cart System
-- 👤 User Authentication (OAuth planned)
-- 💳 Order Processing (basic)
+- 👤 User Authentication (JWT planned)
 - 🧠 In-memory caching (for performance)
 - 🔍 RESTful API Design
-- 🛠️ SQLite or Prisma integration (TBD)
+- 🛠️ PostgreSQL integration
 
 ## 🧱 Tech Stack
 
 - **Language:** Go
-- **Database:** SQLite (switchable)
-- **Authentication:** OAuth (coming soon)
+- **Database:** PostgreSQL (switchable)
+- **Authentication:** JWT (coming soon)
 - **API Style:** REST
-- **Monitoring (planned):** Prometheus + Grafana
 - **Testing:** Built-in Go testing framework
 
 ## 🏗️ Project Structure
@@ -28,10 +27,10 @@ This project is part of my backend development learning journey, focused on buil
 gocommerce/
 ├── cmd/                # Entry point of the application
 ├── internal/           # Business logic
-│   ├── products/       # Product domain logic
-│   ├── users/          # User domain logic
-│   └── orders/         # Order domain logic
-├── pkg/                # Shared utilities
-├── api/                # HTTP handlers and routing
-├── db/                 # Database access and models
+│   ├── db/             # Database access and models
+│   ├── handlers/       # User registry logic
+│   ├── api/            # HTTP handlers and routing logic
+│   ├── middleware/     # Authentication logic
+│   └── models/         # Order domain logic
+├── pkg/                # Shared Utilities
 └── main.go             # Application bootstrapper
