@@ -31,6 +31,6 @@ gocommerce/
 │   ├── handlers/       # User registry logic
 │   ├── api/            # HTTP handlers and routing logic
 │   ├── middleware/     # Authentication logic
-│   └── models/         # Order domain logic
+│   └── models/         # Struct models
 ├── pkg/                # Shared Utilities
 └── main.go             # Application bootstrapper
