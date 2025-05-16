@@ -18,26 +18,25 @@ var DB *pgxpool.Pool
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	var req RegisterRequest
-	err := json.NewDecoder(r.Body).Decode(&req)
-	if err != nil {
+	err := json.NewDecoder(r.Body).Decode(&req) // Parse json into RegisterRequest struct
+	if err != nil {		//Error handling
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
-	if req.Email == "" || req.Pswd == "" {
+	if req.Email == "" || req.Pswd == "" {		//Error handling
 		http.Error(w, "Email and password required", http.StatusBadRequest)
 		return
 	}
 
 	hashed, errs := bcrypt.GenerateFromPassword([]byte(req.Pswd), bcrypt.DefaultCost)
-	if errs != nil {
+	if errs != nil {		//Error handling
 		http.Error(w, "Failed to hash password", http.StatusInternalServerError)
 		return
 	}
-
 	query := `INSERT INTO users (email, password VALUES ($1, $2)`
-	_, err = DB.Exec(context.Background(), query, req.Email, hashed)
-	if err != nil {
+	_, err = DB.Pool.Exec(context.Background(), query, req.Email, hashed)
+	if err != nil {			//Error handling
 		http.Error(w, "Failed to create user", http.StatusInternalServerError)
 		return
 	}
